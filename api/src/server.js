@@ -3,13 +3,14 @@ import helmet from "helmet";
 import cors from "cors";
 import morgan from "morgan";
 import mongoose from "mongoose";
-import multer from "multer";
 import { config } from "dotenv-esm";
 import { fileURLToPath } from "url";
 import bodyParser from "body-parser";
 import path from "path";
+import {upload} from "./file.upload.js"
 
-
+// Import Routes
+import authRoutes from "./routes/auth.routes.js";
 
 // Configurations
 const __filename = fileURLToPath(import.meta.url);
@@ -29,25 +30,9 @@ app.use(bodyParser.json({ limit: "30mb", extended: "true" }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: "true" }));
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 
-// Create an instance of multer with the storage destination
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "public/assets");
-  },
-  filename: (req, file, cb) => {
-    cb(null, file.originalname);
-  }
-});
 
-// Initialize multer with the storage configuration
-const upload = multer({ storage: storage });
-
-// // Import Routes
-// import authRoutes from "./routes/auth.routes";
-
-// // Use Routes
-// app.use("/api/oauth", authRoutes);
-
+// Use Routes
+app.use("/api/oauth", authRoutes);
 
 // Connect to MongoDB
 mongoose
