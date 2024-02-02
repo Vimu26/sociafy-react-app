@@ -9,7 +9,6 @@ const createUser = async (userDetails) => {
 
 const findUserByEmail = async (email) => {
   return userModel.findOne({ email: email }).exec();
-
 };
 
 export default { createUser, findUserByEmail };

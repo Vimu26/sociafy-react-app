@@ -24,7 +24,7 @@ const createUser = async (req, res) => {
 };
 
 const loginUser = async (req, res) => {
-  console.log(req.body)
+  console.log(req.body);
   try {
     const user = await userService.findUserByEmail(req.body.email);
     const comparedPassword = await comparePassword(
