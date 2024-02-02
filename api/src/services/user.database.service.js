@@ -1,8 +1,15 @@
-import userModel from '../models/user.model.js';
+import userModel from "../models/user.model.js";
+import { hashPassword } from "../services/password.service.js";
 
 const createUser = async (userDetails) => {
-  const user = new userModel(userDetails);
+  const hashedPassword = await hashPassword(userDetails.password);
+  const user = new userModel({ ...userDetails, password: hashedPassword });
   return await user.save();
 };
 
-export default { createUser };
+const findUserByEmail = async (email) => {
+  return userModel.findOne({ email: email }).exec();
+
+};
+
+export default { createUser, findUserByEmail };
