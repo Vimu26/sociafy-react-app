@@ -4,5 +4,5 @@ const ajv = new Ajv({ allErrors: true });
 addFormats(ajv);
 
 export default {
-    ajv,
-  };
+  ajv
+};
