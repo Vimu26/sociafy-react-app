@@ -41,24 +41,39 @@ const addressSchema = new Schema({
   }
 });
 
-const userDetailsSchema = new Schema({
-  name: nameSchema,
-  email: {
-    type: String,
-    required: true,
-    unique: true
+const userDetailsSchema = new Schema(
+  {
+    name: nameSchema,
+    email: {
+      type: String,
+      required: true,
+      unique: true
+    },
+    contact_number: {
+      type: String,
+      min: [10],
+      max: [10],
+      required: true
+    },
+    address: addressSchema,
+    password: {
+      type: String,
+      required: true
+    },
+    picture_path: {
+      type: String,
+      default: ""
+    },
+    friends: {
+      type: Array,
+      default: []
+    },
+    location: String,
+    occupation: String,
+    viewed_profiles: Number,
+    impressions: Number
   },
-  contact_number: {
-    type: String,
-    min: [10],
-    max: [10],
-    required: true
-  },
-  address: addressSchema,
-  password: {
-    type: String,
-    required: true
-  }
-});
+  { timestamps: true }
+);
 
 export default new model("user", userDetailsSchema);

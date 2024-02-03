@@ -20,6 +20,24 @@ const createUser = {
     },
     password: {
       type: "string"
+    },
+    location: {
+      type: "string"
+    },
+    friends: {
+      type: "array"
+    },
+    occupation: {
+      type: "string"
+    },
+    picture_path: {
+      type: "string"
+    },
+    viewed_profiles: {
+      type: "number"
+    },
+    impressions: {
+      type: "number"
     }
   },
   required: ["name", "email", "contact_number", "address", "password"],
