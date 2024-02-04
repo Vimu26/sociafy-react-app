@@ -14,12 +14,12 @@ router.post(
   "/register",
   formatValidation.createUserFormatValidation(userSchema.createUser),
   upload.single("picture"),
-  userController.createUser
+  userController.createUser,
 );
 router.post(
   "/login",
   formatValidation.userLoginFormatValidation(userSchema.loginUser),
-  userController.loginUser
+  userController.loginUser,
 );
 
 export default router;

@@ -8,7 +8,7 @@ const createUserFormatValidation = (schema) => {
       return res.status(400).json({
         status: false,
         message: "Error Occurs In Validation of the Request body",
-        error: validateRegisterSchema.errors
+        error: validateRegisterSchema.errors,
       });
     }
     next();
@@ -23,7 +23,7 @@ const userLoginFormatValidation = (schema) => {
       return res.status(400).json({
         status: false,
         message: "Error Occurs In Validation of the Request body",
-        error: validateLoginSchema.errors
+        error: validateLoginSchema.errors,
       });
     }
     next();
@@ -32,5 +32,5 @@ const userLoginFormatValidation = (schema) => {
 
 export default {
   createUserFormatValidation,
-  userLoginFormatValidation
+  userLoginFormatValidation,
 };

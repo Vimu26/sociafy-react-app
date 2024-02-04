@@ -6,39 +6,39 @@ const nameSchema = new Schema({
   salutation: {
     type: String,
     required: true,
-    enum: SalutationEnum
+    enum: SalutationEnum,
   },
   first_name: {
     type: String,
-    required: true
+    required: true,
   },
   middle_name: {
-    type: String
+    type: String,
   },
   last_name: {
     type: String,
-    required: true
-  }
+    required: true,
+  },
 });
 
 //schema for address
 const addressSchema = new Schema({
   no: {
     type: String,
-    required: true
+    required: true,
   },
   street1: {
     type: String,
-    required: true
+    required: true,
   },
   street2: {
     type: String,
-    required: true
+    required: true,
   },
   city: {
     type: String,
-    required: true
-  }
+    required: true,
+  },
 });
 
 const userDetailsSchema = new Schema(
@@ -47,22 +47,22 @@ const userDetailsSchema = new Schema(
     email: {
       type: String,
       required: true,
-      unique: true
+      unique: true,
     },
     contact_number: {
       type: String,
       min: [10],
       max: [10],
-      required: true
+      required: true,
     },
     address: addressSchema,
     password: {
       type: String,
-      required: true
+      required: true,
     },
     picture_path: {
       type: String,
-      default: ""
+      default: "",
     },
     friends: {
       type: Array,
@@ -71,9 +71,9 @@ const userDetailsSchema = new Schema(
     location: String,
     occupation: String,
     viewed_profiles: Number,
-    impressions: Number
+    impressions: Number,
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 export default new model("user", userDetailsSchema);

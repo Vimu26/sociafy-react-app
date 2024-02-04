@@ -8,7 +8,7 @@ const createUser = async (req, res) => {
     res.status(201).json({
       status: true,
       message: "User Registered Successfully",
-      data: user
+      data: user,
     });
   } catch (error) {
     if (!error.code == 11000) {
@@ -18,7 +18,7 @@ const createUser = async (req, res) => {
     res.status(409).json({
       status: false,
       message: "An error occurred Because of Duplicate Creation",
-      error: error.message
+      error: error.message,
     });
   }
 };
@@ -28,7 +28,7 @@ const loginUser = async (req, res) => {
     const user = await userService.findUserByEmail(req.body.email);
     const comparedPassword = await comparePassword(
       req.body.password,
-      user.password
+      user.password,
     );
     if (!user || !comparedPassword) {
       return res
@@ -41,8 +41,8 @@ const loginUser = async (req, res) => {
       status: true,
       message: "User Login Successful",
       data: {
-        token: accessToken
-      }
+        token: accessToken,
+      },
     });
   } catch (err) {
     console.error(err.message);

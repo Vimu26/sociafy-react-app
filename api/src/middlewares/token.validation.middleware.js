@@ -19,7 +19,7 @@ const validateToken = async (req, res, next) => {
         Error: error,
         message: "Token is Invalid Or Expired",
       });
-    }
+    },
   );
 };
 

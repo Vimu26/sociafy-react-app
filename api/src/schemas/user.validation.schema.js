@@ -4,41 +4,41 @@ const createUser = {
   type: "object",
   properties: {
     name: {
-      $ref: "#/definitions/nameSchema"
+      $ref: "#/definitions/nameSchema",
     },
     email: {
       type: "string",
-      format: "email"
+      format: "email",
     },
     contact_number: {
       type: "string",
       minLength: 10,
-      maxLength: 10
+      maxLength: 10,
     },
     address: {
-      $ref: "#/definitions/addressSchema"
+      $ref: "#/definitions/addressSchema",
     },
     password: {
-      type: "string"
+      type: "string",
     },
     location: {
-      type: "string"
+      type: "string",
     },
     friends: {
-      type: "array"
+      type: "array",
     },
     occupation: {
-      type: "string"
+      type: "string",
     },
     picture_path: {
-      type: "string"
+      type: "string",
     },
     viewed_profiles: {
-      type: "number"
+      type: "number",
     },
     impressions: {
-      type: "number"
-    }
+      type: "number",
+    },
   },
   required: ["name", "email", "contact_number", "address", "password"],
   definitions: {
@@ -47,42 +47,42 @@ const createUser = {
       properties: {
         salutation: {
           type: "string",
-          enum: SalutationEnum
+          enum: SalutationEnum,
         },
         first_name: {
-          type: "string"
+          type: "string",
         },
         middle_name: {
-          type: "string"
+          type: "string",
         },
         last_name: {
-          type: "string"
-        }
+          type: "string",
+        },
       },
       required: ["salutation", "first_name", "last_name"],
-      additionalProperties: false
+      additionalProperties: false,
     },
     addressSchema: {
       type: "object",
       properties: {
         no: {
-          type: "string"
+          type: "string",
         },
         street1: {
-          type: "string"
+          type: "string",
         },
         street2: {
-          type: "string"
+          type: "string",
         },
         city: {
-          type: "string"
-        }
+          type: "string",
+        },
       },
       required: ["no", "street1", "street2", "city"],
-      additionalProperties: false
-    }
+      additionalProperties: false,
+    },
   },
-  additionalProperties: false
+  additionalProperties: false,
 };
 
 const loginUser = {
@@ -90,14 +90,14 @@ const loginUser = {
   properties: {
     email: {
       type: "string",
-      format: "email"
+      format: "email",
     },
     password: {
-      type: "string"
-    }
+      type: "string",
+    },
   },
   required: ["email", "password"],
-  additionalProperties: false
+  additionalProperties: false,
 };
 
 export default { createUser, loginUser };

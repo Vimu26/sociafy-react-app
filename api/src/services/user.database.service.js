@@ -31,7 +31,7 @@ const updateUser = async (id, userDetails) => {
     userDetails.password = await hashPassword(userDetails.password);
   }
   return await userModel.findByIdAndUpdate(id, userDetails, {
-    new: true
+    new: true,
   });
 };
 
@@ -66,5 +66,5 @@ export default {
   updateUser,
   deleteUser,
   getAllFriends,
-  addRemoveFriends
+  addRemoveFriends,
 };
