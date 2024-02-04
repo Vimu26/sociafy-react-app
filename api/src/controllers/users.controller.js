@@ -26,6 +26,20 @@ const getSingleUser = async (req, res) => {
   }
 };
 
+const getAllFriends = async (req, res) => {
+  try {
+    const friends = await userService.getAllFriends(req.params.id);
+    res.status(200).json({
+      status: true,
+      message: "Friends Found Successfully",
+      data: friends
+    });
+  } catch (err) {
+    console.error("An error occurred", err.message);
+    return res.status(500).json({ status: false, message: err.message });
+  }
+};
+
 const createUser = async (req, res) => {
   try {
     const user = await userService.createUser(req.body);
@@ -82,10 +96,35 @@ const deleteUser = async (req, res) => {
   }
 };
 
+const addRemoveFriends = async (req, res) => {
+  try {
+    const status = await userService.addRemoveFriends(
+      req.params.id,
+      req.params.friendId
+    );
+    if (status === true) {
+      res.status(200).json({
+        status: true,
+        message: "Friend Added Successfully"
+      });
+    } else {
+      res.status(200).json({
+        status: true,
+        message: "Friend Deleted Successfully"
+      });
+    }
+  } catch (err) {
+    console.error("An error occurred", err);
+    return res.status(500).json({ status: false, message: err.message });
+  }
+};
+
 export default {
   getAllUsers,
   createUser,
   updateUser,
   deleteUser,
-  getSingleUser
+  getSingleUser,
+  getAllFriends,
+  addRemoveFriends
 };

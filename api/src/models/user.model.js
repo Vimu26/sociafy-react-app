@@ -66,7 +66,7 @@ const userDetailsSchema = new Schema(
     },
     friends: {
       type: Array,
-      default: []
+      default: [],
     },
     location: String,
     occupation: String,

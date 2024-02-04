@@ -9,6 +9,12 @@ const getSingleUser = async (id) => {
   return await userModel.findById(id);
 };
 
+const getAllFriends = async (id) => {
+  const user = await userModel.findById(id);
+  const friends = await user.friends.map((id) => userModel.findById(id));
+  return await friends;
+};
+
 // Add a new User to the database
 const createUser = async (userDetails) => {
   const hashedPassword = await hashPassword(userDetails.password);
@@ -29,6 +35,25 @@ const updateUser = async (id, userDetails) => {
   });
 };
 
+const addRemoveFriends = async (userId, friendId) => {
+  const user = await userModel.findById(userId);
+  const friend = await userModel.findById(friendId);
+
+  if (user.friends.includes(friendId)) {
+    user.friends.filter((id) => id !== friendId);
+    friend.friends.filter((id) => id !== userId);
+    await user.save();
+    await friend.save();
+    return false;
+  } else {
+    user.friends.push(friendId);
+    friend.friends.push(userId);
+    await user.save();
+    await friend.save();
+    return true;
+  }
+};
+
 const deleteUser = async (id) => {
   return userModel.findByIdAndDelete(id);
 };
@@ -39,5 +64,7 @@ export default {
   getAllUsers,
   getSingleUser,
   updateUser,
-  deleteUser
+  deleteUser,
+  getAllFriends,
+  addRemoveFriends
 };

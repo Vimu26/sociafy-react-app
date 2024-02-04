@@ -8,6 +8,7 @@ import { fileURLToPath } from "url";
 import bodyParser from "body-parser";
 import path from "path";
 import {upload} from "./file.upload.js"
+import bearerToken from "express-bearer-token";
 
 // Import Routes
 import authRoutes from "./routes/auth.routes.js";
@@ -30,6 +31,7 @@ app.use(morgan("common"));
 app.use(bodyParser.json({ limit: "30mb", extended: "true" }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: "true" }));
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
+app.use(bearerToken());
 
 
 // Use Routes
