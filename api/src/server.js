@@ -11,6 +11,7 @@ import {upload} from "./file.upload.js"
 
 // Import Routes
 import authRoutes from "./routes/auth.routes.js";
+import userRoutes from "./routes/users.routes.js"
 
 // Configurations
 const __filename = fileURLToPath(import.meta.url);
@@ -33,6 +34,8 @@ app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 
 // Use Routes
 app.use("/api/oauth", authRoutes);
+app.use("/api/users", userRoutes)
+
 
 // Connect to MongoDB
 mongoose
