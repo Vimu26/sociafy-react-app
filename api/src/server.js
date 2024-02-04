@@ -7,12 +7,12 @@ import { config } from "dotenv-esm";
 import { fileURLToPath } from "url";
 import bodyParser from "body-parser";
 import path from "path";
-import {upload} from "./file.upload.js"
+// import {upload} from "./file.upload.js"
 import bearerToken from "express-bearer-token";
 
 // Import Routes
 import authRoutes from "./routes/auth.routes.js";
-import userRoutes from "./routes/users.routes.js"
+import userRoutes from "./routes/users.routes.js";
 
 // Configurations
 const __filename = fileURLToPath(import.meta.url);
@@ -33,11 +33,9 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: "true" }));
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 app.use(bearerToken());
 
-
 // Use Routes
 app.use("/api/oauth", authRoutes);
-app.use("/api/users", userRoutes)
-
+app.use("/api/users", userRoutes);
 
 // Connect to MongoDB
 mongoose

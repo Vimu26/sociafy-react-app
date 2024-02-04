@@ -6,7 +6,7 @@ const getAllUsers = async (req, res) => {
     res.status(200).json({
       status: true,
       message: "Users Found Successfully",
-      data: userDetails
+      data: userDetails,
     });
   } catch (err) {
     console.error("An error occurred", err.message);
@@ -32,7 +32,7 @@ const getAllFriends = async (req, res) => {
     res.status(200).json({
       status: true,
       message: "Friends Found Successfully",
-      data: friends
+      data: friends,
     });
   } catch (err) {
     console.error("An error occurred", err.message);
@@ -46,7 +46,7 @@ const createUser = async (req, res) => {
     res.status(201).json({
       status: true,
       message: "User Created Successfully",
-      data: user
+      data: user,
     });
   } catch (error) {
     if (!error.code == 11000) {
@@ -56,7 +56,7 @@ const createUser = async (req, res) => {
     res.status(409).json({
       status: false,
       message: "An error occurred Because of Duplicate Creation",
-      error: error.message
+      error: error.message,
     });
   }
 };
@@ -67,7 +67,7 @@ const updateUser = async (req, res) => {
     res.status(200).json({
       status: true,
       message: "User Updated Successfully",
-      data: user
+      data: user,
     });
   } catch (error) {
     if (!error.code == 11000) {
@@ -77,7 +77,7 @@ const updateUser = async (req, res) => {
     res.status(409).json({
       status: false,
       message: "An error occurred Because of Duplicate Creation",
-      error: error.message
+      error: error.message,
     });
   }
 };
@@ -88,7 +88,7 @@ const deleteUser = async (req, res) => {
     res.status(200).json({
       status: true,
       message: "User Deleted Successfully",
-      data: deleteUser
+      data: deleteUser,
     });
   } catch (err) {
     console.error("An error occurred", err);
@@ -100,17 +100,17 @@ const addRemoveFriends = async (req, res) => {
   try {
     const status = await userService.addRemoveFriends(
       req.params.id,
-      req.params.friendId
+      req.params.friendId,
     );
     if (status === true) {
       res.status(200).json({
         status: true,
-        message: "Friend Added Successfully"
+        message: "Friend Added Successfully",
       });
     } else {
       res.status(200).json({
         status: true,
-        message: "Friend Deleted Successfully"
+        message: "Friend Deleted Successfully",
       });
     }
   } catch (err) {
@@ -126,5 +126,5 @@ export default {
   deleteUser,
   getSingleUser,
   getAllFriends,
-  addRemoveFriends
+  addRemoveFriends,
 };
