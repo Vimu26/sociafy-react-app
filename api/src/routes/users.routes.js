@@ -17,7 +17,11 @@ router.get(
 );
 
 //get friends
-router.get("/:id/friends", usersController.getAllFriends);
+router.get(
+  "/:id/friends",
+  tokenMiddleware.validateToken,
+  usersController.getAllFriends,
+);
 
 //create a new user
 router.post(
@@ -27,12 +31,20 @@ router.post(
 );
 
 //update user partially
-router.patch("/:id", usersController.updateUser);
+router.patch("/:id", tokenMiddleware.validateToken, usersController.updateUser);
 
 // delete user
-router.delete("/:id", usersController.deleteUser);
+router.delete(
+  "/:id",
+  tokenMiddleware.validateToken,
+  usersController.deleteUser,
+);
 
 //add or remove friends
-router.patch("/:id/:friendId", usersController.addRemoveFriends);
+router.patch(
+  "/:id/:friendId",
+  tokenMiddleware.validateToken,
+  usersController.addRemoveFriends,
+);
 
 export default router;

@@ -13,6 +13,7 @@ import bearerToken from "express-bearer-token";
 // Import Routes
 import authRoutes from "./routes/auth.routes.js";
 import userRoutes from "./routes/users.routes.js";
+import postRoutes from "./routes/posts.routes.js";
 
 // Configurations
 const __filename = fileURLToPath(import.meta.url);
@@ -36,6 +37,7 @@ app.use(bearerToken());
 // Use Routes
 app.use("/api/oauth", authRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/posts", postRoutes);
 
 // Connect to MongoDB
 mongoose
