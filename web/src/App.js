@@ -17,7 +17,8 @@ function App() {
     <div className="app">
       <BrowserRouter>
         <ThemeProvider theme={theme}>
-          <CssBaseline/>
+          <CssBaseline />
+          <NavbarPage/>
           <Routes>
             <Route path="/Home" element={<HomePage></HomePage>}></Route>
             <Route path="/Login" element={<LoginPage></LoginPage>}></Route>
@@ -28,8 +29,6 @@ function App() {
           </Routes>
         </ThemeProvider>
       </BrowserRouter>
-
-      <NavbarPage></NavbarPage>
     </div>
   );
 }
