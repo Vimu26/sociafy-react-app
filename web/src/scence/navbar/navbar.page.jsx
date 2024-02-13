@@ -17,8 +17,8 @@ import {
   LightMode,
   Notifications,
   Help,
-  Menu,
-  Close
+  // Menu,
+  // Close
 } from "@mui/icons-material";
 import { useSelector, useDispatch } from "react-redux";
 import FlexBetween from "../../components/FlexBetween";
@@ -35,7 +35,7 @@ const NavbarPage = () => {
   const theme = useTheme();
   const neutralLight = theme.palette.neutral.light;
   const dark = theme.palette.neutral.dark;
-  const background = theme.palette.background.default;
+  // const background = theme.palette.background.default;
   const primaryLight = theme.palette.primary.light;
   const alt = theme.palette.background.alt;
 
