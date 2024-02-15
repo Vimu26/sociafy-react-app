@@ -1,6 +1,9 @@
+import { Box } from "@mui/material";
+import NavbarPage from "scence/navbar/navbar.page";
 
 
 const HomePage = () => {
-  return (<div> This is the Home Page </div>);
+  return (<Box> 
+    <NavbarPage></NavbarPage> </Box>);
 };
 export default HomePage
