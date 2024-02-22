@@ -3,6 +3,14 @@ import ajv from "../services/ajv.format.validation.service.js";
 const createUserFormatValidation = (schema) => {
   const validateRegisterSchema = ajv.ajv.compile(schema);
   return (req, res, next) => {
+    if (
+      typeof req.body.name === "string" &&
+      typeof req.body.address === "string"
+    ) {
+      req.body.name = JSON.parse(req.body.name);
+      req.body.address = JSON.parse(req.body.address);
+    }
+    console.log("schema", req.body);
     const isValid = validateRegisterSchema(req.body);
     if (!isValid) {
       return res.status(400).json({

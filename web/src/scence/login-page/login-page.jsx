@@ -43,8 +43,8 @@
 
 // LoginForm.jsx
 // LoginForm.jsx
-import React from "react";
-// import { useState } from "react";
+
+import { useState } from "react";
 import {
   Box,
   useMediaQuery,
@@ -62,6 +62,7 @@ import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setLogin } from "state";
+import axios from "axios";
 // import FlexBetween from "../../components/FlexBetween";
 
 const loginSchema = yup.object().shape({
@@ -82,22 +83,22 @@ const LoginPage = () => {
   const isMobile = useMediaQuery("(min-width:600px)");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [showPassword, setShowPassword] = React.useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleFormSubmit = async (values, onSubmitProps) => {
     await login(values, onSubmitProps);
   };
 
   const login = async (values, onSubmitProps) => {
-    const loggedResponse = await fetch(
+    const loggedResponse = await axios.post(
       "http://localhost:3620/api/oauth/login",
+      values,
       {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values)
+        headers: { "Content-Type": "application/json" }
       }
     );
-    const loggedIn = await loggedResponse.json();
+    const loggedIn = await loggedResponse.data;
+    //TODO loggedIn.user is not coming from backend
     onSubmitProps.resetForm(loggedIn);
     if (loggedIn) {
       dispatch(

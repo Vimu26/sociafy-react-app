@@ -12,8 +12,8 @@ const router = Router();
 
 router.post(
   "/register",
-  formatValidation.createUserFormatValidation(userSchema.createUser),
   upload.single("picture"),
+  formatValidation.createUserFormatValidation(userSchema.createUser),
   userController.createUser,
 );
 router.post(
