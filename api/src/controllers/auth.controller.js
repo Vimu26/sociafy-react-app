@@ -3,6 +3,7 @@ import { comparePassword } from "../services/password.service.js";
 import { userTokenGenerator } from "../services/token.service.js";
 
 const createUser = async (req, res) => {
+  console.log(req.body);
   try {
     const user = await userService.createUser(req.body);
     res.status(201).json({
@@ -11,6 +12,7 @@ const createUser = async (req, res) => {
       data: user,
     });
   } catch (error) {
+    //TODO fix error handling properly
     if (!error.code == 11000) {
       console.error("An error occurred", error.message);
       return res.status(500).json({ status: false, message: error.message });

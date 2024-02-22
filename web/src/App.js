@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "./scence/home-page/home-page.jsx";
 import LoginPage from "./scence/login-page/login-page.jsx";
-// import NavbarPage from "./scence/navbar/navbar.page.jsx";
+import RegisterPage from "./scence/Register-Page/Register-page.jsx";
 import ProfilePage from "./scence/profile-page/profile.page.jsx";
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
@@ -22,7 +22,10 @@ function App() {
           <Routes>
             <Route path="/Home" element={<HomePage></HomePage>}></Route>
             <Route path="/Login" element={<LoginPage></LoginPage>}></Route>
-            <Route path="/register" element={<LoginPage></LoginPage>}></Route>
+            <Route
+              path="/register"
+              element={<RegisterPage></RegisterPage>}
+            ></Route>
             <Route
               path="/profile/:userId"
               element={<ProfilePage></ProfilePage>}

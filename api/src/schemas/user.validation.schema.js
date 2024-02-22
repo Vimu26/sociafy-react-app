@@ -78,7 +78,7 @@ const createUser = {
           type: "string",
         },
       },
-      required: ["no", "street1", "street2", "city"],
+      required: ["no", "street1", "city"],
       additionalProperties: false,
     },
   },

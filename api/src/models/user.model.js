@@ -33,7 +33,6 @@ const addressSchema = new Schema({
   },
   street2: {
     type: String,
-    required: true,
   },
   city: {
     type: String,
@@ -68,10 +67,10 @@ const userDetailsSchema = new Schema(
       type: Array,
       default: [],
     },
-    location: String,
-    occupation: String,
-    viewed_profiles: Number,
-    impressions: Number,
+    location: { type: String },
+    occupation: { type: String },
+    viewed_profiles: { type: Number },
+    impressions: { type: Number },
   },
   { timestamps: true },
 );
