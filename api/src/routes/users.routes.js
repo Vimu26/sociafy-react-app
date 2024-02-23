@@ -10,10 +10,17 @@ import tokenMiddleware from "../middlewares/token.validation.middleware.js";
 router.get("/", usersController.getAllUsers);
 
 //get single user
+// router.get(
+//   "/:id",
+//   tokenMiddleware.validateToken,
+//   usersController.getSingleUser,
+// );
+
+//get single user using token
 router.get(
-  "/:id",
+  "/user",
   tokenMiddleware.validateToken,
-  usersController.getSingleUser,
+  usersController.getSingleUserByToken,
 );
 
 //get friends

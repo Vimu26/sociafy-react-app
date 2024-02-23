@@ -1,9 +1,29 @@
-import { Box } from "@mui/material";
+import { Box, useMediaQuery } from "@mui/material";
+// import { useSelector } from "react-redux";
 import NavbarPage from "scence/navbar/navbar.page";
-
+import UserWidget from "scence/widgets/UserWidget";
 
 const HomePage = () => {
-  return (<Box> 
-    <NavbarPage></NavbarPage> </Box>);
+  const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
+  // const {_id , picture_path} = useSelector((state)=> state.user)
+  return (
+    <Box>
+      <NavbarPage></NavbarPage>
+      <Box
+        width="100%"
+        padding="2rem 6%"
+        display={isNonMobileScreens ? "flex" : "block"}
+        gap="0.5rem"
+        justifyContent="space-between"
+      >
+        <Box flexBasis={isNonMobileScreens ? "26%" : undefined}>
+          <UserWidget />
+          {/* <UserWidget userId={_id} picturePath={picture_path}/> */}
+        </Box>
+        <Box flexBasis={isNonMobileScreens ? "42%" : undefined}></Box>
+        <Box flexBasis={isNonMobileScreens ? "26%" : undefined}></Box>
+      </Box>
+    </Box>
+  );
 };
-export default HomePage
+export default HomePage;
