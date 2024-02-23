@@ -26,6 +26,18 @@ const getSingleUser = async (req, res) => {
   }
 };
 
+const getSingleUserByToken = async (req, res) => {
+  try {
+    const user = await userService.getSingleUser(req.userId);
+    res
+      .status(200)
+      .json({ status: true, message: "User Found Successfully", data: user });
+  } catch (err) {
+    console.error("An error occurred", err.message);
+    return res.status(500).json({ status: false, message: err.message });
+  }
+};
+
 const getAllFriends = async (req, res) => {
   try {
     const friends = await userService.getAllFriends(req.params.id);
@@ -127,4 +139,5 @@ export default {
   getSingleUser,
   getAllFriends,
   addRemoveFriends,
+  getSingleUserByToken,
 };

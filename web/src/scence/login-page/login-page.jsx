@@ -1,49 +1,3 @@
-// import { Box, useMediaQuery, Typography, useTheme } from "@mui/material";
-// import Form from "../login-page/form";
-
-// const LoginPage = () => {
-//   const theme = useTheme();
-//   const isNonMobileScreens = useMediaQuery("(min-width:960px)");
-//   return (
-//     <Box>
-//       <Box>
-//         <Typography
-//           fontWeight="bold"
-//           fontSize="32px"
-//           color="primary"
-//           display="flex"
-//           justifyContent="center"
-//           mt="10px"
-//         >
-//           Sociafy
-//         </Typography>
-//       </Box>
-//       <Box
-//         width={isNonMobileScreens ? "50%" : "93%"}
-//         p="2rem"
-//         m="2rem auto"
-//         borderRadius="1.5rem"
-//         backgroundColor={theme.palette.background.alt}
-//       >
-//         <Typography
-//           fontWeight="bold"
-//           variant="h4"
-//           sx={{
-//             mb: "2rem"
-//           }}
-//         >
-//           Welcome to Sociafy
-//         </Typography>
-//         <Form></Form>
-//       </Box>
-//     </Box>
-//   );
-// };
-// export default LoginPage;
-
-// LoginForm.jsx
-// LoginForm.jsx
-
 import { useState } from "react";
 import {
   Box,
@@ -98,13 +52,14 @@ const LoginPage = () => {
       }
     );
     const loggedIn = await loggedResponse.data;
+    console.log(loggedIn)
     //TODO loggedIn.user is not coming from backend
     onSubmitProps.resetForm(loggedIn);
     if (loggedIn) {
       dispatch(
         setLogin({
-          user: loggedIn.user,
-          token: loggedIn.token
+          user: loggedIn.data.user,
+          token: loggedIn.data.token
         })
       );
       navigate("/home");
