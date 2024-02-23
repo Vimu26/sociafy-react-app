@@ -107,7 +107,7 @@ const RegisterPage = () => {
     formData.append("contact_number", values.contact_number);
     formData.append("occupation", values.occupation);
     formData.append("password", values.password);
-    formData.append("picture_path", values.picture.name);
+    formData.append("picture", values.picture);
 
     try {
       const saveUserResponse = await axios.post(

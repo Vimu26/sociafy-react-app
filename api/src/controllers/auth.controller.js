@@ -3,8 +3,10 @@ import { comparePassword } from "../services/password.service.js";
 import { userTokenGenerator } from "../services/token.service.js";
 
 const createUser = async (req, res) => {
-  console.log(req.body);
   try {
+    if (req.file) {
+      req.body.picture_path = req.file.path
+    }
     const user = await userService.createUser(req.body);
     res.status(201).json({
       status: true,

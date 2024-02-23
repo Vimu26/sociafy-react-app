@@ -10,7 +10,6 @@ const createUserFormatValidation = (schema) => {
       req.body.name = JSON.parse(req.body.name);
       req.body.address = JSON.parse(req.body.address);
     }
-    console.log("schema", req.body);
     const isValid = validateRegisterSchema(req.body);
     if (!isValid) {
       return res.status(400).json({
