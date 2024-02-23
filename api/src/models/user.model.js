@@ -62,6 +62,7 @@ const userDetailsSchema = new Schema(
     picture_path: {
       type: String,
       default: "",
+      required:true,
     },
     friends: {
       type: Array,

@@ -54,6 +54,9 @@ const getAllFriends = async (req, res) => {
 
 const createUser = async (req, res) => {
   try {
+    if (req.file) {
+      req.body.picture_path = req.file
+    }
     const user = await userService.createUser(req.body);
     res.status(201).json({
       status: true,
