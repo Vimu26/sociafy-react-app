@@ -22,11 +22,11 @@ function App() {
           {/* <NavbarPage/> */}
           <Routes>
             {/* Default route redirects to /login */}
+            <Route path="/" element={<Navigate to="/login" replace />}></Route>
             <Route
-              path="/"
-              element={<Navigate to="/login" replace />}
+              path="/home"
+              element={isAuth ? <HomePage /> : <Navigate to="/login" />}
             ></Route>
-            <Route path="/home" element={isAuth? <HomePage/> : <Navigate to="/login"/>}></Route>
             <Route path="/login" element={<LoginPage></LoginPage>}></Route>
             <Route
               path="/register"
@@ -34,7 +34,9 @@ function App() {
             ></Route>
             <Route
               path="/profile/:userId"
-              element={isAuth? <ProfilePage></ProfilePage> : <Navigate to="/login"/> }
+              element={
+                isAuth ? <ProfilePage></ProfilePage> : <Navigate to="/login" />
+              }
             ></Route>
           </Routes>
         </ThemeProvider>
