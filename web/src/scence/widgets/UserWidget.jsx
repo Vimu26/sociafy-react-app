@@ -49,7 +49,7 @@ const UserWidget = () => {
     name = {},
     address = {},
     occupation,
-    viewedProfile,
+    viewed_profiles,
     impressions,
     friends,
     picture_path
@@ -84,7 +84,8 @@ const UserWidget = () => {
             </Typography>
             <Typography color={medium}>{friends.length} friends</Typography>
           </Box>
-          <ManageAccountsOutlined />
+        </FlexBetween>
+        <ManageAccountsOutlined />
         </FlexBetween>
         <Divider />
         <Box p="1rem 0">
@@ -99,12 +100,12 @@ const UserWidget = () => {
             <Typography color={medium}>{occupation}</Typography>
           </Box>
         </Box>
-
+        <Divider />
         <Box p="1rem 0">
           <FlexBetween mb="0.5 rem">
             <Typography color={medium}>Who's Viewed Your Profile</Typography>
             <Typography color={main} fontWeight="500">
-              {viewedProfile}
+              {viewed_profiles}
             </Typography>
           </FlexBetween>
           <FlexBetween mb="0.5 rem">
@@ -114,7 +115,7 @@ const UserWidget = () => {
             </Typography>
           </FlexBetween>
         </Box>
-
+        <Divider />
         <Box p="1rem 0">
           <Typography fontSize="1rem" fontWeight="500" color={main} mb="1rem">
             Social Profiles
@@ -133,7 +134,7 @@ const UserWidget = () => {
             </FlexBetween>
             <EditOutlined sx={{ color: main }} />
           </FlexBetween>
-
+          <Divider />
           <FlexBetween gap="1rem">
             <FlexBetween gap="1rem">
               <img src="../../../public/assets/linkedin.png" alt="Linkedin" />
@@ -149,7 +150,6 @@ const UserWidget = () => {
             <EditOutlined sx={{ color: main }} />
           </FlexBetween>
         </Box>
-      </FlexBetween>
     </WidgetWrapper>
   );
 };
