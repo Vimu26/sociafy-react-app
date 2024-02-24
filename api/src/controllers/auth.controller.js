@@ -46,6 +46,7 @@ const loginUser = async (req, res) => {
       message: "User Login Successful",
       data: {
         token: accessToken,
+        user: user
       },
     });
   } catch (err) {

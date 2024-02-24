@@ -10,6 +10,9 @@ const postDetailsSchema = new Schema(
       required: true,
       ref: "user",
     },
+    description: {
+      type: String,
+    },
     picture_path: {
       type: String,
     },

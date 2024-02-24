@@ -20,9 +20,9 @@ router.get(
 //create a post
 router.post(
   "/",
-  formatValidation.createPostFormatValidation(postsSchema.createPost),
   tokenMiddleware.validateToken,
   upload.single("picture"),
+  formatValidation.createPostFormatValidation(postsSchema.createPost),
   postsController.createPost,
 );
 

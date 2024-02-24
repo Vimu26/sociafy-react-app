@@ -52,7 +52,6 @@ const LoginPage = () => {
       }
     );
     const loggedIn = await loggedResponse.data;
-    console.log(loggedIn);
     //TODO loggedIn.user is not coming from backend
     onSubmitProps.resetForm(loggedIn);
     if (loggedIn) {
