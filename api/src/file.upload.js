@@ -1,7 +1,15 @@
+import { fileURLToPath } from "url";
+import { dirname, join } from "path";
+import express from "express";
+import path from "path";
 import multer from "multer";
 import Grid from "gridfs-stream";
 import mongoose from "mongoose";
-import fs from "fs";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const app = express();
 
 // Connect to MongoDB using Mongoose
 mongoose.connect("mongodb://127.0.0.1:27017/sociafy-app");
@@ -18,7 +26,8 @@ const gfs = Grid(db, mongoose.mongo);
 // Configure multer with disk storage
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, "public/uploads"));
+    const uploadDir = path.join(__dirname, "..", "public", "uploads");
+    cb(null, uploadDir);
   },
   filename: (req, file, cb) => {
     cb(null, Date.now() + "-" + file.originalname);
@@ -28,14 +37,13 @@ const storage = multer.diskStorage({
 // Initialize multer with the storage configuration
 export const upload = multer({ storage });
 
-export const handleFileUpload = async (req, res) => {
-  try {
-    const { originalname, mimetype, filename } = req.file;
+// Serve static files from the "public" directory
+app.use(express.static(path.join(__dirname, "..", "public")));
 
-    // Check if the file exists before proceeding
-    if (!fs.existsSync(`public/uploads/${filename}`)) {
-      return res.status(404).json({ message: "File not found" });
-    }
+// Handle file uploads
+app.post("/upload", upload.single("file"), (req, res) => {
+  try {
+    const { originalname, mimetype } = req.file;
 
     // Create a write stream to GridFS
     const writeStream = gfs.createWriteStream({
@@ -49,11 +57,11 @@ export const handleFileUpload = async (req, res) => {
     writeStream.end();
 
     // Handle the finish event
-    writeStream.on("finish", async () => {
+    writeStream.on("finish", () => {
       // Return the filename of the uploaded file
       res.status(200).json({
         message: "File uploaded successfully!",
-        filename,
+        filename: originalname,
       });
     });
 
@@ -66,4 +74,4 @@ export const handleFileUpload = async (req, res) => {
     console.error("Error handling file upload:", error);
     res.status(500).json({ message: "Internal Server Error" });
   }
-};
+});

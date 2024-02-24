@@ -32,22 +32,22 @@ const MyPostWidget = () => {
   const [image, setImage] = useState(null);
   const [post, setPost] = useState("");
   const { palette } = useTheme();
-  const user  = useSelector((state) => state.user);
+  const user = useSelector((state) => state.user);
   const token = useSelector((state) => state.token);
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
   const mediumMain = palette.neutral.mediumMain;
   const medium = palette.neutral.medium;
 
-  const handlePost = async () =>{
+  const handlePost = async () => {
     const formData = new FormData();
-    formData.append("user", user._id)
-    formData.append("description", post)
-    if(image){
-        formData.append("picture_path", image)
+    formData.append("user", user._id);
+    formData.append("description", post);
+    if (image) {
+      formData.append("picture", image);
     }
-    
-      try {
-        const response = await axios.post(
+
+    try {
+      const response = await axios.post(
         "http://localhost:3620/api/posts/",
         formData,
         {
@@ -59,15 +59,14 @@ const MyPostWidget = () => {
       );
 
       const posts = response.data;
-      dispatch(setPosts({posts}));
-      setImage(null)
-      setPost("")
+      dispatch(setPosts({ posts }));
+      setImage(null);
+      setPost("");
       console.log(post);
-
     } catch (error) {
       console.error("Post Creation failed:", error);
     }
-  }
+  };
 
   return (
     <WidgetWrapper>
@@ -81,7 +80,7 @@ const MyPostWidget = () => {
             width: "100%",
             backgroundColor: palette.neutral.light,
             borderRadius: "2rem",
-            padding: "1rem 2rem",
+            padding: "1rem 2rem"
           }}
         />
       </FlexBetween>
@@ -172,7 +171,7 @@ const MyPostWidget = () => {
           sx={{
             color: palette.background.alt,
             backgroundColor: palette.primary.main,
-            borderRadius: "3rem",
+            borderRadius: "3rem"
           }}
         >
           POST

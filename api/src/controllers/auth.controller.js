@@ -5,7 +5,7 @@ import { userTokenGenerator } from "../services/token.service.js";
 const createUser = async (req, res) => {
   try {
     if (req.file) {
-      req.body.picture_path = req.file.path
+      req.body.picture_path = req.file.filename;
     }
     const user = await userService.createUser(req.body);
     res.status(201).json({
@@ -46,7 +46,7 @@ const loginUser = async (req, res) => {
       message: "User Login Successful",
       data: {
         token: accessToken,
-        user: user
+        user: user,
       },
     });
   } catch (err) {
