@@ -23,7 +23,6 @@ const UserWidget = () => {
   const main = palette.neutral.main;
 
   const getUser = async () => {
-    console.log(token);
     try {
       const response = await axios.get("http://localhost:3620/api/users/user", {
         headers: {
@@ -31,7 +30,6 @@ const UserWidget = () => {
         }
       });
       setUser(response.data);
-      console.log(response.data);
     } catch (err) {
       //
     }

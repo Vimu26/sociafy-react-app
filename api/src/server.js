@@ -39,6 +39,12 @@ app.use("/api/oauth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/posts", postRoutes);
 
+// app.use("/uploads", (req, res, next) => {
+//   const filePath = path.join(__dirname, "public/uploads", req.path);
+//   console.log("File Path:", filePath);
+//   express.static(filePath)(req, res, next);
+// });
+
 // Connect to MongoDB
 mongoose
   .connect("mongodb://127.0.0.1:27017/sociafy-app")
@@ -48,4 +54,3 @@ mongoose
 // Start server
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Server running on port ${port}...`));
-

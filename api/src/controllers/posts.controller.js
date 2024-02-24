@@ -29,8 +29,10 @@ const getAllPostsOfUser = async (req, res) => {
 };
 
 const createPost = async (req, res) => {
-  console.log(req.body);
   try {
+    if (req.file) {
+      req.body.picture_path = req.file.filename;
+    }
     const Post = await PostsService.createPost(req.body);
     res.status(201).json({
       status: true,
