@@ -1,7 +1,7 @@
 import PostsService from "../services/posts.database.service.js";
 
 const getAllPosts = async (req, res) => {
-  console.log(req.query)
+  console.log(req.query);
   const { userId } = req.query;
   let query = {};
   if (userId) {
