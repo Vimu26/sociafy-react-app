@@ -1,8 +1,14 @@
 import PostsService from "../services/posts.database.service.js";
 
 const getAllPosts = async (req, res) => {
+  console.log(req.query);
+  const { userId } = req.query;
+  let query = {};
+  if (userId) {
+    query = { user: userId };
+  }
   try {
-    const Posts = await PostsService.getAllPosts();
+    const Posts = await PostsService.getAllPosts(query);
     res.status(200).json({
       status: true,
       message: "Posts Found Successfully",
@@ -64,9 +70,10 @@ const updatePost = async (req, res) => {
 
 const likePost = async (req, res) => {
   const id = req.params.id;
+  console.log(req.body);
   const userId = req.body.user;
   try {
-    const Post = await PostsService.updatePost(id, userId);
+    const Post = await PostsService.likePost(id, userId);
     res.status(200).json({
       status: true,
       message: "Post Liked Successfully",

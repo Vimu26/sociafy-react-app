@@ -1,8 +1,8 @@
 import postsModel from "../models/posts.model.js";
 import PostModel from "../models/posts.model.js";
 
-const getAllPosts = async () => {
-  return await PostModel.find().populate("user");
+const getAllPosts = async (query) => {
+  return await PostModel.find(query).populate("user");
 };
 
 const getPostOfUser = async (id) => {
@@ -15,13 +15,24 @@ const createPost = async (PostDetails) => {
 };
 
 const updatePost = async (id, PostDetails) => {
+  if (PostDetails.comments) {
+    const post = await PostModel.findById(id);
+    post.comments.push(PostDetails.comments);
+    return await PostModel.findByIdAndUpdate(id, post, {
+      new: true,
+    });
+  }
   return await PostModel.findByIdAndUpdate(id, PostDetails, {
     new: true,
   });
 };
 
 const likePost = async (id, userId) => {
+  console.log(userId);
   const post = await postsModel.findById(id);
+  if (!post.likes) {
+    post.likes = new Map();
+  }
   const isLiked = post.likes.get(userId);
 
   if (isLiked) {

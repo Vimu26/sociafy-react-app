@@ -10,7 +10,7 @@ import tokenMiddleware from "../middlewares/token.validation.middleware.js";
 //get all Posts
 router.get("/", tokenMiddleware.validateToken, postsController.getAllPosts);
 
-//get single Post
+//get a post Posts
 router.get(
   "/:id",
   tokenMiddleware.validateToken,
