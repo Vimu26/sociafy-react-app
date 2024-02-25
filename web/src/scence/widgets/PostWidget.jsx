@@ -166,12 +166,10 @@ const PostWidget = ({
                   <FlexBetween>
                     <UserImage image={comment.user.picture_path} size="55px" />
                     <Box>
-                      <Typography
-                        color={main}
-                        variant="h5"
-                        fontWeight="500"
-                      >
-                        {comment.user.name.first_name + " "+comment.user.name.last_name }
+                      <Typography color={main} variant="h5" fontWeight="500">
+                        {comment.user.name.first_name +
+                          " " +
+                          comment.user.name.last_name}
                       </Typography>
                       <Typography color={main} fontSize="0.75rem">
                         {comment.comment}
@@ -181,12 +179,12 @@ const PostWidget = ({
                 </FlexBetween>
               </Box>
 
-                // <Box key={`${name}-${i}`}>
-                //   <Divider />
-                //   <Typography sx={{ color: main, m: "0.5rem 0", pl: "1rem" }}>
-                //     {comment}
-                //   </Typography>
-                // </Box>
+              // <Box key={`${name}-${i}`}>
+              //   <Divider />
+              //   <Typography sx={{ color: main, m: "0.5rem 0", pl: "1rem" }}>
+              //     {comment}
+              //   </Typography>
+              // </Box>
             ))}
           </Box>
         </>

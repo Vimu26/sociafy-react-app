@@ -17,7 +17,7 @@ const createPost = async (PostDetails) => {
 const updatePost = async (id, PostDetails) => {
   if (PostDetails.comments) {
     const post = await PostModel.findById(id);
-    post.comments.push(PostDetails.comments); 
+    post.comments.push(PostDetails.comments);
     return await PostModel.findByIdAndUpdate(id, post, {
       new: true,
     });
@@ -27,9 +27,8 @@ const updatePost = async (id, PostDetails) => {
   });
 };
 
-
 const likePost = async (id, userId) => {
-  console.log(userId)
+  console.log(userId);
   const post = await postsModel.findById(id);
   if (!post.likes) {
     post.likes = new Map();

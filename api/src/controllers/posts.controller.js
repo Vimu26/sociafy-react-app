@@ -57,7 +57,6 @@ const createPost = async (req, res) => {
 const updatePost = async (req, res) => {
   try {
     const Post = await PostsService.updatePost(req.params.id, req.body);
-    console.log(Post)
     res.status(200).json({
       status: true,
       message: "Post Updated Successfully",
@@ -71,7 +70,7 @@ const updatePost = async (req, res) => {
 
 const likePost = async (req, res) => {
   const id = req.params.id;
-  console.log(req.body)
+  console.log(req.body);
   const userId = req.body.user;
   try {
     const Post = await PostsService.likePost(id, userId);
