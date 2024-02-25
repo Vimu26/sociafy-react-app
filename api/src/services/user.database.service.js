@@ -11,8 +11,15 @@ const getSingleUser = async (id) => {
 
 const getAllFriends = async (id) => {
   const user = await userModel.findById(id);
-  const friends = await user.friends.map((id) => userModel.findById(id));
-  return await friends;
+  console.log(user);
+  const friendPromises = user.friends.map(async (friendId) => {
+    return await userModel.findById(friendId);
+  });
+
+  const friends = await Promise.all(friendPromises);
+  console.log(friends);
+
+  return friends;
 };
 
 // Add a new User to the database
@@ -41,14 +48,18 @@ const addRemoveFriends = async (userId, friendId) => {
   if (user.friends.includes(friendId)) {
     user.friends = user.friends.filter((id) => id !== friendId);
     friend.friends = friend.friends.filter((id) => id !== userId);
-    await friend.save();
-    return await user.save();
   } else {
     user.friends.push(friendId);
     friend.friends.push(userId);
-    await friend.save();
-    return await user.save();
   }
+  await friend.save();
+  await user.save();
+
+  const friends = await Promise.all(
+    user.friends.map((id) => userModel.findById(id)),
+  );
+
+  return friends;
 };
 
 const deleteUser = async (id) => {
