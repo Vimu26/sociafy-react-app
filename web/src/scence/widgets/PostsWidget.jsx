@@ -19,8 +19,7 @@ const PostsWidget = ({ isProfile = false }) => {
       });
 
       const data = response.data;
-      console.log(posts);
-      dispatch(setPosts({ posts: data }));
+      dispatch(setPosts({ posts: data.data }));
     } catch (error) {
       console.error("Post Showing failed:", error);
     }
@@ -38,8 +37,7 @@ const PostsWidget = ({ isProfile = false }) => {
       });
 
       const data = response.data;
-      console.log(posts);
-      dispatch(setPosts({ posts: data }));
+      dispatch(setPosts({ posts: data.data }));
     } catch (error) {
       console.error("Post Showing failed:", error);
     }
@@ -52,34 +50,26 @@ const PostsWidget = ({ isProfile = false }) => {
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  //   return (
-  //     <>
-  //       {posts.map(
-  //         ({
-  //           _id,
-  //           user,
-  //           description,
-  //           location,
-  //           picture_path,
-  //           likes,
-  //           comments,
-  //         }) => (
-  //           <PostWidget
-  //             key={_id}
-  //             postId={_id}
-  //             postUserId={user._id}
-  //             name={`${user.first_name} ${user.last_name}`}
-  //             description={description}
-  //             location={location}
-  //             picturePath={picture_path}
-  //             userPicturePath={user.picture_path}
-  //             likes={likes}
-  //             comments={comments}
-  //           />
-  //         )
-  //       )}
-  //     </>
-  //   );
+    return (
+      <>
+        {posts.map(
+          (post) => (
+            <PostWidget
+              key={post._id}
+              postId={post._id}
+              postUserId={post.user._id}
+              name={`${post.user.name.first_name}  ${post.user.name.last_name}`}
+              description={post.description}
+              location={post.user.address.city}
+              picturePath={post.picture_path}
+              userPicturePath={post.user.picture_path}
+              likes={post.likes}
+              comments={post.comments}
+            />
+          )
+        )}
+      </>
+    );
 };
 
 export default PostsWidget;

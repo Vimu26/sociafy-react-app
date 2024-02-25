@@ -70,9 +70,10 @@ const updatePost = async (req, res) => {
 
 const likePost = async (req, res) => {
   const id = req.params.id;
+  console.log(req.body)
   const userId = req.body.user;
   try {
-    const Post = await PostsService.updatePost(id, userId);
+    const Post = await PostsService.likePost(id, userId);
     res.status(200).json({
       status: true,
       message: "Post Liked Successfully",
