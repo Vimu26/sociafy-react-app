@@ -38,19 +38,16 @@ const updateUser = async (id, userDetails) => {
 const addRemoveFriends = async (userId, friendId) => {
   const user = await userModel.findById(userId);
   const friend = await userModel.findById(friendId);
-
   if (user.friends.includes(friendId)) {
-    user.friends.filter((id) => id !== friendId);
-    friend.friends.filter((id) => id !== userId);
-    await user.save();
+    user.friends = user.friends.filter((id) => id !== friendId);
+    friend.friends = friend.friends.filter((id) => id !== userId);
     await friend.save();
-    return false;
+    return await user.save();
   } else {
     user.friends.push(friendId);
     friend.friends.push(userId);
-    await user.save();
     await friend.save();
-    return true;
+    return await user.save();
   }
 };
 

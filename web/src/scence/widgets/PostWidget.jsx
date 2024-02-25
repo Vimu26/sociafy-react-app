@@ -58,7 +58,6 @@ const PostWidget = ({
           }
         }
       );
-      console.log(response.data);
       dispatch(setPost({ post: response.data }));
     } catch (error) {
       console.error("Liking Failed:", error);
@@ -66,7 +65,6 @@ const PostWidget = ({
   };
 
   const addComment = async (comment) => {
-    console.log(comment);
     try {
       const response = await axios.patch(
         `http://localhost:3620/api/posts/${postId}`,
@@ -78,7 +76,6 @@ const PostWidget = ({
           }
         }
       );
-      console.log(response.data);
       dispatch(setPost({ post: response.data }));
     } catch (error) {
       console.error("Commenting Failed:", error);

@@ -55,7 +55,7 @@ const getAllFriends = async (req, res) => {
 const createUser = async (req, res) => {
   try {
     if (req.file) {
-      req.body.picture_path = req.file
+      req.body.picture_path = req.file;
     }
     const user = await userService.createUser(req.body);
     res.status(201).json({
@@ -113,12 +113,13 @@ const deleteUser = async (req, res) => {
 
 const addRemoveFriends = async (req, res) => {
   try {
-    const status = await userService.addRemoveFriends(
+    const friends = await userService.addRemoveFriends(
       req.params.id,
       req.params.friendId,
     );
-    if (status === true) {
+    if (friends) {
       res.status(200).json({
+        data: friends,
         status: true,
         message: "Friend Added Successfully",
       });

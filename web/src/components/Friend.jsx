@@ -20,12 +20,13 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
   const main = palette.neutral.main;
   const medium = palette.neutral.medium;
 
-  const isFriend = friends.find((friend) => friend._id === friendId);
+  const isFriend = !!friends.find((friend) => friend === friendId);
 
   const patchFriend = async () => {
     try {
-      const response = await axios.get(
+      const response = await axios.patch(
         `http://localhost:3620/api/users/${user._id}/${friendId}`,
+        {},
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -34,8 +35,7 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
         }
       );
       const data = response.data;
-      console.log(data);
-      dispatch(setFriends({ friends: data }));
+      dispatch(setFriends({ friends: data.data.friends }));
     } catch (error) {
       console.error("Friend Add or Remove failed:", error);
     }
