@@ -20,9 +20,11 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
   const main = palette.neutral.main;
   const medium = palette.neutral.medium;
 
-  const isFriend = !!friends.find((friend) => friend === friendId);
+  const isFriend =
+    friends && !!friends.find((friend) => friend._id === friendId);
 
   const patchFriend = async () => {
+    console.log(isFriend);
     try {
       const response = await axios.patch(
         `http://localhost:3620/api/users/${user._id}/${friendId}`,

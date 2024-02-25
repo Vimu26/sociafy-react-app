@@ -4,10 +4,12 @@ import NavbarPage from "scence/navbar/navbar.page";
 import UserWidget from "scence/widgets/UserWidget";
 import MyPostWidget from "scence/widgets/MyPostWidget";
 import PostsWidget from "scence/widgets/PostsWidget";
+import FriendListWidget from "scence/widgets/FriendListWidget";
+import { useSelector } from "react-redux";
 
 const HomePage = () => {
   const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
-  // const {_id , picture_path} = useSelector((state)=> state.user)
+  const user = useSelector((state) => state.user);
   return (
     <Box>
       <NavbarPage></NavbarPage>
@@ -31,7 +33,9 @@ const HomePage = () => {
           />
           <PostsWidget />
         </Box>
-        <Box flexBasis={isNonMobileScreens ? "26%" : undefined}></Box>
+        <Box flexBasis={isNonMobileScreens ? "26%" : undefined}>
+          <FriendListWidget userId={user._id} />
+        </Box>
       </Box>
     </Box>
   );
