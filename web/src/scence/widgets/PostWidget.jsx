@@ -4,7 +4,14 @@ import {
   FavoriteOutlined,
   ShareOutlined
 } from "@mui/icons-material";
-import { Box, Divider, IconButton, Typography, useTheme } from "@mui/material";
+import {
+  Box,
+  Divider,
+  IconButton,
+  Typography,
+  useTheme,
+  TextField
+} from "@mui/material";
 import FlexBetween from "components/FlexBetween";
 import Friend from "components/Friend";
 import WidgetWrapper from "components/widgetWrapper";
@@ -12,6 +19,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setPost } from "state";
 import axios from "axios";
+import SendOutlinedIcon from "@mui/icons-material/SendOutlined";
 
 const PostWidget = ({
   postId,
@@ -25,12 +33,12 @@ const PostWidget = ({
   comments
 }) => {
   const [isComments, setIsComments] = useState(false);
+  const [commentText, setCommentText] = useState("");
   const dispatch = useDispatch();
   const token = useSelector((state) => state.token);
   const loggedInUserId = useSelector((state) => state.user._id);
   const isLiked = Boolean(likes?.[loggedInUserId.toString()] ?? false);
   const likeCount = likes ? Object.keys(likes).length : 0;
-
 
   const { palette } = useTheme();
   const main = palette.neutral.main;
@@ -53,6 +61,10 @@ const PostWidget = ({
     } catch (error) {
       console.error("Liking Failed:", error);
     }
+  };
+
+  const addComment = () => {
+    //
   };
 
   return (
@@ -101,17 +113,44 @@ const PostWidget = ({
         </IconButton>
       </FlexBetween>
       {isComments && (
-        <Box mt="0.5rem">
-          {comments.map((comment, i) => (
-            <Box key={`${name}-${i}`}>
-              <Divider />
-              <Typography sx={{ color: main, m: "0.5rem 0", pl: "1rem" }}>
-                {comment}
-              </Typography>
-            </Box>
-          ))}
-          <Divider />
-        </Box>
+        <>
+          <Box mt="1rem">
+            <TextField
+              value={commentText}
+              onChange={(e) => setCommentText(e.target.value)}
+              placeholder="Add a comment..."
+              multiline
+              minRows={1}
+              fullWidth
+              InputProps={{
+                endAdornment: (
+                  <IconButton
+                    onClick={() => {
+                      if (commentText.trim() !== "") {
+                        addComment(commentText);
+                        setCommentText("");
+                      }
+                    }}
+                    disabled={commentText.trim() === ""}
+                  >
+                    <SendOutlinedIcon />
+                  </IconButton>
+                )
+              }}
+            />
+          </Box>
+          <Box mt="0.5rem">
+            {comments.map((comment, i) => (
+              <Box key={`${name}-${i}`}>
+                <Divider />
+                <Typography sx={{ color: main, m: "0.5rem 0", pl: "1rem" }}>
+                  {comment}
+                </Typography>
+              </Box>
+            ))}
+            <Divider />
+          </Box>
+        </>
       )}
     </WidgetWrapper>
   );
