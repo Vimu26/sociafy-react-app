@@ -62,7 +62,6 @@ const MyPostWidget = () => {
       dispatch(setPosts({ posts }));
       setImage(null);
       setPost("");
-      console.log(post);
     } catch (error) {
       console.error("Post Creation failed:", error);
     }

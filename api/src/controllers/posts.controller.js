@@ -1,8 +1,14 @@
 import PostsService from "../services/posts.database.service.js";
 
 const getAllPosts = async (req, res) => {
+  console.log(req.query)
+  const { userId } = req.query;
+  let query = {};
+  if (userId) {
+    query = { user: userId };
+  }
   try {
-    const Posts = await PostsService.getAllPosts();
+    const Posts = await PostsService.getAllPosts(query);
     res.status(200).json({
       status: true,
       message: "Posts Found Successfully",

@@ -3,6 +3,7 @@ import { Box, useMediaQuery } from "@mui/material";
 import NavbarPage from "scence/navbar/navbar.page";
 import UserWidget from "scence/widgets/UserWidget";
 import MyPostWidget from "scence/widgets/MyPostWidget";
+import PostsWidget from "scence/widgets/PostsWidget";
 
 const HomePage = () => {
   const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
@@ -28,6 +29,7 @@ const HomePage = () => {
            <MyPostWidget 
           //  picturePath={picturePath}
            />
+           <PostsWidget/>
 
         </Box>
         <Box flexBasis={isNonMobileScreens ? "26%" : undefined}></Box>

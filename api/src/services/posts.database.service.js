@@ -1,8 +1,8 @@
 import postsModel from "../models/posts.model.js";
 import PostModel from "../models/posts.model.js";
 
-const getAllPosts = async () => {
-  return await PostModel.find().populate("user");
+const getAllPosts = async (query) => {
+  return await PostModel.find(query).populate("user");
 };
 
 const getPostOfUser = async (id) => {
