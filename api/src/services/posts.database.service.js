@@ -15,13 +15,25 @@ const createPost = async (PostDetails) => {
 };
 
 const updatePost = async (id, PostDetails) => {
+  if (PostDetails.comments) {
+    const post = await PostModel.findById(id);
+    post.comments.push(PostDetails.comments); 
+    return await PostModel.findByIdAndUpdate(id, post, {
+      new: true,
+    });
+  }
   return await PostModel.findByIdAndUpdate(id, PostDetails, {
     new: true,
   });
 };
 
+
 const likePost = async (id, userId) => {
+  console.log(userId)
   const post = await postsModel.findById(id);
+  if (!post.likes) {
+    post.likes = new Map();
+  }
   const isLiked = post.likes.get(userId);
 
   if (isLiked) {

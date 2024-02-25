@@ -57,6 +57,7 @@ const createPost = async (req, res) => {
 const updatePost = async (req, res) => {
   try {
     const Post = await PostsService.updatePost(req.params.id, req.body);
+    console.log(Post)
     res.status(200).json({
       status: true,
       message: "Post Updated Successfully",
