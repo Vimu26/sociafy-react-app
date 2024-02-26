@@ -41,7 +41,6 @@ const getSingleUserByToken = async (req, res) => {
 const getAllFriends = async (req, res) => {
   try {
     const friends = await userService.getAllFriends(req.params.id);
-    console.log(friends);
     res.status(200).json({
       status: true,
       message: "Friends Found Successfully",

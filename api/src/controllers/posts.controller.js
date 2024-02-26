@@ -1,7 +1,6 @@
 import PostsService from "../services/posts.database.service.js";
 
 const getAllPosts = async (req, res) => {
-  console.log(req.query);
   const { userId } = req.query;
   let query = {};
   if (userId) {
@@ -70,7 +69,6 @@ const updatePost = async (req, res) => {
 
 const likePost = async (req, res) => {
   const id = req.params.id;
-  console.log(req.body);
   const userId = req.body.user;
   try {
     const Post = await PostsService.likePost(id, userId);
