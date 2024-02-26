@@ -28,7 +28,6 @@ const updatePost = async (id, PostDetails) => {
 };
 
 const likePost = async (id, userId) => {
-  console.log(userId);
   const post = await postsModel.findById(id);
   if (!post.likes) {
     post.likes = new Map();

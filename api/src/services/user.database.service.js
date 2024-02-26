@@ -11,13 +11,11 @@ const getSingleUser = async (id) => {
 
 const getAllFriends = async (id) => {
   const user = await userModel.findById(id);
-  console.log(user);
   const friendPromises = user.friends.map(async (friendId) => {
     return await userModel.findById(friendId);
   });
 
   const friends = await Promise.all(friendPromises);
-  console.log(friends);
 
   return friends;
 };

@@ -12,8 +12,8 @@ const createPost = {
         },
       ],
     },
-    description:{
-      type: "string"
+    description: {
+      type: "string",
     },
     comments: {
       type: "array",
