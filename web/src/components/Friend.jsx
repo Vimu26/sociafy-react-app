@@ -36,6 +36,7 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
         }
       );
       const data = response.data;
+      console.log(data)
       dispatch(setFriends({ friends: data.data.friends }));
     } catch (error) {
       console.error("Friend Add or Remove failed:", error);

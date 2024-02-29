@@ -39,7 +39,7 @@ const NavbarPage = () => {
   const primaryLight = theme.palette.primary.light;
   const alt = theme.palette.background.alt;
 
-  const fullName = `${user?.first_name} ${user?.last_name}`;
+  const fullName = `${user.name.first_name} ${user.name.last_name}`;
 
   return (
     <FlexBetween padding="1rem 6%" backgroundColor={alt}>

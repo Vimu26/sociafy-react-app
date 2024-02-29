@@ -43,18 +43,24 @@ const updateUser = async (id, userDetails) => {
 const addRemoveFriends = async (userId, friendId) => {
   const user = await userModel.findById(userId);
   const friend = await userModel.findById(friendId);
+
   if (user.friends.includes(friendId)) {
+    // User is removing the friend
     user.friends = user.friends.filter((id) => id !== friendId);
     friend.friends = friend.friends.filter((id) => id !== userId);
   } else {
+    // User is adding the friend
     user.friends.push(friendId);
     friend.friends.push(userId);
   }
-  await friend.save();
-  await user.save();
 
+  // Save changes to both user and friend
+  await Promise.all([user.save(), friend.save()]);
+
+  // Retrieve updated friends list for the user
+  const updatedUser = await userModel.findById(userId);
   const friends = await Promise.all(
-    user.friends.map((id) => userModel.findById(id)),
+    updatedUser.friends.map((id) => userModel.findById(id)),
   );
 
   return friends;
