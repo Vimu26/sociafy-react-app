@@ -41,10 +41,11 @@ const updateUser = async (id, userDetails) => {
 };
 
 const addRemoveFriends = async (userId, friendId) => {
+  console.log(userId + " and " + friendId);
   const user = await userModel.findById(userId);
   const friend = await userModel.findById(friendId);
 
-  if (user.friends.includes(friendId)) {
+  if (user.friends.includes(friendId) && friend.friends.includes(userId)) {
     // User is removing the friend
     user.friends = user.friends.filter((id) => id !== friendId);
     friend.friends = friend.friends.filter((id) => id !== userId);
@@ -53,7 +54,8 @@ const addRemoveFriends = async (userId, friendId) => {
     user.friends.push(friendId);
     friend.friends.push(userId);
   }
-
+  console.log(user.friends);
+  console.log(friend.friends)
   // Save changes to both user and friend
   await Promise.all([user.save(), friend.save()]);
 

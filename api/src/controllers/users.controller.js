@@ -125,6 +125,7 @@ const addRemoveFriends = async (req, res) => {
       });
     } else {
       res.status(200).json({
+        data: friends,
         status: true,
         message: "Friend Deleted Successfully",
       });
