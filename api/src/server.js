@@ -7,6 +7,7 @@ import { config } from "dotenv-esm";
 import { fileURLToPath } from "url";
 import bodyParser from "body-parser";
 import path from "path";
+import fs from "fs";
 // import {upload} from "./file.upload.js"
 import bearerToken from "express-bearer-token";
 
@@ -31,13 +32,38 @@ app.use(cors());
 app.use(morgan("common"));
 app.use(bodyParser.json({ limit: "30mb", extended: "true" }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: "true" }));
-app.use("/uploads", express.static(path.join(__dirname, "public/uploads")));
+app.use(express.static(path.join(__dirname, "..", "public")));
 app.use(bearerToken());
 
 // Use Routes
 app.use("/api/oauth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/posts", postRoutes);
+
+//get images
+app.get("/uploads/:filename", (req, res) => {
+  const filename = req.params.filename;
+  const filePath = path.join(__dirname, "..", "public", "uploads", filename);
+
+  if (fs.existsSync(filePath)) {
+    const fileExt = path.extname(filename).toLowerCase();
+    switch (fileExt) {
+      case ".jpg":
+      case ".jpeg":
+        res.setHeader("Content-Type", "image/jpeg");
+        break;
+      case ".png":
+        res.setHeader("Content-Type", "image/png");
+        break;
+      default:
+        res.setHeader("Content-Type", "application/octet-stream");
+    }
+    const fileStream = fs.createReadStream(filePath);
+    fileStream.pipe(res);
+  } else {
+    res.status(404).json({ message: "File not found" });
+  }
+});
 
 // Connect to MongoDB
 mongoose

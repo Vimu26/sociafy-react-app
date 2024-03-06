@@ -9,7 +9,7 @@ export async function userTokenGenerator(user) {
       email: user.email,
     },
     process.env.SECRET_ACCESS_TOKEN,
-    { expiresIn: "30m" },
+    { expiresIn: "50m" },
   );
   return accessToken;
 }
