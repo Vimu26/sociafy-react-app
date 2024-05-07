@@ -55,7 +55,7 @@ const addRemoveFriends = async (userId, friendId) => {
     friend.friends.push(userId);
   }
   console.log(user.friends);
-  console.log(friend.friends)
+  console.log(friend.friends);
   // Save changes to both user and friend
   await Promise.all([user.save(), friend.save()]);
 
