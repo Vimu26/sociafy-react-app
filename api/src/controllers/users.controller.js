@@ -117,7 +117,7 @@ const addRemoveFriends = async (req, res) => {
       req.params.id,
       req.params.friendId,
     );
-    if (friends.length > 0) {
+    if (friends?.length > 0) {
       res.status(200).json({
         data: friends,
         status: true,

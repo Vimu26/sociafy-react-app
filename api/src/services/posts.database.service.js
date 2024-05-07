@@ -1,28 +1,27 @@
 import postsModel from "../models/posts.model.js";
-import PostModel from "../models/posts.model.js";
 
 const getAllPosts = async (query) => {
-  return await PostModel.find(query).populate("user");
+  return await postsModel.find(query).populate("user");
 };
 
 const getPostOfUser = async (id) => {
-  return await PostModel.findById(id).populate("user");
+  return await postsModel.findById(id).populate("user");
 };
 
 const createPost = async (PostDetails) => {
-  const Post = new PostModel({ ...PostDetails });
+  const Post = new postsModel({ ...PostDetails });
   return await Post.save();
 };
 
 const updatePost = async (id, PostDetails) => {
   if (PostDetails.comments) {
-    const post = await PostModel.findById(id);
+    const post = await postsModel.findById(id);
     post.comments.push(PostDetails.comments);
-    return await PostModel.findByIdAndUpdate(id, post, {
+    return await postsModel.findByIdAndUpdate(id, post, {
       new: true,
     });
   }
-  return await PostModel.findByIdAndUpdate(id, PostDetails, {
+  return await postsModel.findByIdAndUpdate(id, PostDetails, {
     new: true,
   });
 };
@@ -48,7 +47,7 @@ const likePost = async (id, userId) => {
 };
 
 const deletePost = async (id) => {
-  return PostModel.findByIdAndDelete(id);
+  return postsModel.findByIdAndDelete(id);
 };
 
 export default {
