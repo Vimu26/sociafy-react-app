@@ -18,8 +18,8 @@ const FriendListWidget = ({ userId }) => {
         `http://localhost:3620/api/users/${userId}/friends`,
         {
           headers: {
-            Authorization: `Bearer ${token}`
-          }
+            Authorization: `Bearer ${token}`,
+          },
         }
       );
 
@@ -32,7 +32,7 @@ const FriendListWidget = ({ userId }) => {
 
   useEffect(() => {
     getFriends();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [friends]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <WidgetWrapper>

@@ -2,7 +2,7 @@ import {
   ChatBubbleOutlineOutlined,
   FavoriteBorderOutlined,
   FavoriteOutlined,
-  ShareOutlined
+  ShareOutlined,
 } from "@mui/icons-material";
 import {
   Box,
@@ -10,7 +10,7 @@ import {
   IconButton,
   Typography,
   useTheme,
-  TextField
+  TextField,
 } from "@mui/material";
 import FlexBetween from "components/FlexBetween";
 import Friend from "components/Friend";
@@ -31,16 +31,19 @@ const PostWidget = ({
   picturePath,
   userPicturePath,
   likes,
-  comments
+  comments,
 }) => {
   const [isComments, setIsComments] = useState(false);
   const [commentText, setCommentText] = useState("");
   const dispatch = useDispatch();
   const token = useSelector((state) => state.token);
+  const post = useSelector((state) =>
+    state.posts.find((post) => post?._id === postId)
+  );
   const loggedInUserId = useSelector((state) => state.user._id);
   const user = useSelector((state) => state.user);
   const isLiked = Boolean(likes?.[loggedInUserId.toString()] ?? false);
-  const likeCount = likes ? Object.keys(likes).length : 0;
+  const likeCount = likes ? Object.keys(likes)?.length : 0;
 
   const { palette } = useTheme();
   const main = palette.neutral.main;
@@ -48,17 +51,27 @@ const PostWidget = ({
 
   const addLike = async () => {
     try {
-      const response = await axios.patch(
+      await axios.patch(
         `http://localhost:3620/api/posts/${postId}/like`,
         { user: loggedInUserId },
         {
           headers: {
             Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json"
-          }
+            "Content-Type": "application/json",
+          },
         }
       );
-      dispatch(setPost({ post: response.data }));
+      dispatch(
+        setPost({
+          post: {
+            ...post,
+            likes: {
+              ...post.likes,
+              [loggedInUserId.toString()]: !isLiked, // Toggle like status
+            },
+          },
+        })
+      );
     } catch (error) {
       console.error("Liking Failed:", error);
     }
@@ -66,17 +79,24 @@ const PostWidget = ({
 
   const addComment = async (comment) => {
     try {
-      const response = await axios.patch(
+      await axios.patch(
         `http://localhost:3620/api/posts/${postId}`,
         { comments: { user: user, comment: comment } },
         {
           headers: {
             Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json"
-          }
+            "Content-Type": "application/json",
+          },
         }
       );
-      dispatch(setPost({ post: response.data }));
+      dispatch(
+        setPost({
+          post: {
+            ...post,
+            comments: [...post.comments, { user: user, comment: comment }],
+          },
+        })
+      );
     } catch (error) {
       console.error("Commenting Failed:", error);
     }
@@ -119,7 +139,7 @@ const PostWidget = ({
             <IconButton onClick={() => setIsComments(!isComments)}>
               <ChatBubbleOutlineOutlined />
             </IconButton>
-            <Typography>{comments.length}</Typography>
+            <Typography>{comments?.length}</Typography>
           </FlexBetween>
         </FlexBetween>
 
@@ -151,7 +171,7 @@ const PostWidget = ({
                   >
                     <SendOutlinedIcon />
                   </IconButton>
-                )
+                ),
               }}
             />
           </Box>

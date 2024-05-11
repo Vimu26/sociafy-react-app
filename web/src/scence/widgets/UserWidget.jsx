@@ -1,7 +1,7 @@
 import {
   ManageAccountsOutlined,
   EditOutlined,
-  WorkOutlineOutlined
+  WorkOutlineOutlined,
 } from "@mui/icons-material";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import React, { useEffect, useState } from "react";
@@ -26,8 +26,8 @@ const UserWidget = () => {
     try {
       const response = await axios.get("http://localhost:3620/api/users/user", {
         headers: {
-          Authorization: `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       });
       setUser(response.data);
     } catch (err) {
@@ -50,7 +50,7 @@ const UserWidget = () => {
     viewed_profiles,
     impressions,
     friends,
-    picture_path
+    picture_path,
   } = user.data;
 
   const { salutation = "", first_name = "", last_name = "" } = name;
@@ -74,13 +74,13 @@ const UserWidget = () => {
               sx={{
                 "&:hover": {
                   color: palette.primary.light,
-                  cursor: "pointer"
-                }
+                  cursor: "pointer",
+                },
               }}
             >
               {salutation + " " + first_name + " " + last_name}
             </Typography>
-            <Typography color={medium}>{friends.length} friends</Typography>
+            <Typography color={medium}>{friends?.length} friends</Typography>
           </Box>
         </FlexBetween>
         <ManageAccountsOutlined />

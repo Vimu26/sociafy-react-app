@@ -31,13 +31,12 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
         {
           headers: {
             Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json"
-          }
+            "Content-Type": "application/json",
+          },
         }
       );
-      const data = response.data;
-      console.log(data);
-      dispatch(setFriends({ friends: data.data.friends }));
+      const updatedFriends = response.data.data.friends; // Assuming the response contains the updated list of friends
+      dispatch(setFriends({ friends: updatedFriends }));
     } catch (error) {
       console.error("Friend Add or Remove failed:", error);
     }
@@ -60,8 +59,8 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
             sx={{
               "&:hover": {
                 color: palette.primary.light,
-                cursor: "pointer"
-              }
+                cursor: "pointer",
+              },
             }}
           >
             {name}

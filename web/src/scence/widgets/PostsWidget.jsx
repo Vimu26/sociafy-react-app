@@ -14,8 +14,8 @@ const PostsWidget = ({ isProfile = false }) => {
     try {
       const response = await axios.get("http://localhost:3620/api/posts/", {
         headers: {
-          Authorization: `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       });
 
       const data = response.data;
@@ -29,11 +29,11 @@ const PostsWidget = ({ isProfile = false }) => {
     try {
       const response = await axios.get("http://localhost:3620/api/posts/", {
         headers: {
-          Authorization: `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
         params: {
-          userId: user_id._id
-        }
+          userId: user_id._id,
+        },
       });
 
       const data = response.data;
@@ -48,7 +48,7 @@ const PostsWidget = ({ isProfile = false }) => {
     } else {
       getAllPosts();
     }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [posts]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>

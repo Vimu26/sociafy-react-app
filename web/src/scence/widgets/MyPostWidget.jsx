@@ -5,7 +5,7 @@ import {
   GifBoxOutlined,
   ImageOutlined,
   MicOutlined,
-  MoreHorizOutlined
+  MoreHorizOutlined,
 } from "@mui/icons-material";
 import {
   Box,
@@ -15,7 +15,7 @@ import {
   useTheme,
   Button,
   IconButton,
-  useMediaQuery
+  useMediaQuery,
 } from "@mui/material";
 import FlexBetween from "components/FlexBetween";
 import Dropzone from "react-dropzone";
@@ -34,6 +34,7 @@ const MyPostWidget = () => {
   const { palette } = useTheme();
   const user = useSelector((state) => state.user);
   const token = useSelector((state) => state.token);
+  const posts = useSelector((state) => state.posts);
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
   const mediumMain = palette.neutral.mediumMain;
   const medium = palette.neutral.medium;
@@ -53,13 +54,13 @@ const MyPostWidget = () => {
         {
           headers: {
             Authorization: `Bearer ${token}`,
-            "Content-Type": "multipart/form-data"
-          }
+            "Content-Type": "multipart/form-data",
+          },
         }
       );
 
-      const posts = response.data;
-      dispatch(setPosts({ posts }));
+      const newPost = response.data;
+      dispatch(setPosts({ posts: [newPost, ...posts] }));
       setImage(null);
       setPost("");
     } catch (error) {
@@ -79,7 +80,7 @@ const MyPostWidget = () => {
             width: "100%",
             backgroundColor: palette.neutral.light,
             borderRadius: "2rem",
-            padding: "1rem 2rem"
+            padding: "1rem 2rem",
           }}
         />
       </FlexBetween>
@@ -170,7 +171,7 @@ const MyPostWidget = () => {
           sx={{
             color: palette.background.alt,
             backgroundColor: palette.primary.main,
-            borderRadius: "3rem"
+            borderRadius: "3rem",
           }}
         >
           POST
