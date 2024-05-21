@@ -10,7 +10,7 @@ import {
   Select,
   MenuItem,
   InputLabel,
-  IconButton
+  IconButton,
 } from "@mui/material";
 import Dropzone from "react-dropzone";
 import FormHelperText from "@mui/material/FormHelperText";
@@ -29,7 +29,7 @@ const registerSchema = yup.object().shape({
   name: yup.object().shape({
     salutation: yup.string().required("Salutation is required"),
     first_name: yup.string().required("First Name is required"),
-    last_name: yup.string().required("Last Name is required")
+    last_name: yup.string().required("Last Name is required"),
   }),
   email: yup.string().email("Invalid email").required("Email is required"),
   contact_number: yup
@@ -41,11 +41,11 @@ const registerSchema = yup.object().shape({
     no: yup.string().required("Address No is required"),
     street1: yup.string().required("Street1 is required"),
     street2: yup.string(),
-    city: yup.string().required("City is required")
+    city: yup.string().required("City is required"),
   }),
   password: yup.string().required("Password is required"),
   occupation: yup.string(),
-  picture: yup.string().required("Profile picture is Required")
+  picture: yup.string().required("Profile picture is Required"),
 });
 
 const initialValuesRegister = {
@@ -53,7 +53,7 @@ const initialValuesRegister = {
     salutation: "",
     first_name: "",
     middle_name: "",
-    last_name: ""
+    last_name: "",
   },
   email: "",
   contact_number: "",
@@ -61,11 +61,11 @@ const initialValuesRegister = {
     no: "",
     street1: "",
     street2: "",
-    city: ""
+    city: "",
   },
   password: "",
   occupation: "",
-  picture: ""
+  picture: "",
 };
 
 const RegisterPage = () => {
@@ -90,7 +90,7 @@ const RegisterPage = () => {
         salutation: values.name.salutation,
         first_name: values.name.first_name,
         middle_name: values.name.middle_name || "",
-        last_name: values.name.last_name
+        last_name: values.name.last_name,
       })
     );
 
@@ -100,7 +100,7 @@ const RegisterPage = () => {
         no: values.address.no,
         street1: values.address.street1,
         street2: values.address.street2 || "",
-        city: values.address.city
+        city: values.address.city,
       })
     );
     formData.append("email", values.email);
@@ -115,8 +115,8 @@ const RegisterPage = () => {
         formData,
         {
           headers: {
-            "Content-Type": "multipart/form-data"
-          }
+            "Content-Type": "multipart/form-data",
+          },
         }
       );
 
@@ -163,7 +163,7 @@ const RegisterPage = () => {
           fontWeight="bold"
           variant="h4"
           sx={{
-            mb: "2rem"
+            mb: "2rem",
           }}
         >
           Welcome to Sociafy
@@ -181,7 +181,7 @@ const RegisterPage = () => {
             handleChange,
             handleSubmit,
             setFieldValue,
-            resetForm
+            resetForm,
           }) => (
             <form onSubmit={handleSubmit}>
               <Box
@@ -189,7 +189,7 @@ const RegisterPage = () => {
                 gap="30px"
                 gridTemplateColumns="repeat(4,minmax(0, 1fr))"
                 sx={{
-                  "& > div": { gridColumn: isMobile ? undefined : "span 4" }
+                  "& > div": { gridColumn: isMobile ? undefined : "span 4" },
                 }}
               >
                 <>
@@ -243,7 +243,7 @@ const RegisterPage = () => {
                     {...(errors.name?.first_name &&
                       touched.name?.first_name && {
                         error: true,
-                        helperText: errors.name?.first_name
+                        helperText: errors.name?.first_name,
                       })}
                   />
                   <TextField
@@ -271,7 +271,7 @@ const RegisterPage = () => {
                     {...(errors.name?.last_name &&
                       touched.name?.last_name && {
                         error: true,
-                        helperText: errors.name?.last_name
+                        helperText: errors.name?.last_name,
                       })}
                   />
                   <TextField
@@ -286,7 +286,7 @@ const RegisterPage = () => {
                     {...(errors.email &&
                       touched.email && {
                         error: true,
-                        helperText: errors.email
+                        helperText: errors.email,
                       })}
                   />
                   <TextField
@@ -304,7 +304,7 @@ const RegisterPage = () => {
                     {...(errors.contact_number &&
                       touched.contact_number && {
                         error: true,
-                        helperText: errors.contact_number
+                        helperText: errors.contact_number,
                       })}
                   />
                   <TextField
@@ -321,7 +321,7 @@ const RegisterPage = () => {
                     {...(errors.address?.no &&
                       touched.address?.no && {
                         error: true,
-                        helperText: errors.address?.no
+                        helperText: errors.address?.no,
                       })}
                   />
                   <TextField
@@ -341,7 +341,7 @@ const RegisterPage = () => {
                     {...(errors.address?.street1 &&
                       touched.address?.street1 && {
                         error: true,
-                        helperText: errors.address?.street1
+                        helperText: errors.address?.street1,
                       })}
                   />
                   <TextField
@@ -367,7 +367,7 @@ const RegisterPage = () => {
                     {...(errors.address?.city &&
                       touched.address?.city && {
                         error: true,
-                        helperText: errors.address?.city
+                        helperText: errors.address?.city,
                       })}
                   />
                   <TextField
@@ -434,13 +434,13 @@ const RegisterPage = () => {
                             {showPassword ? <VisibilityOff /> : <Visibility />}
                           </IconButton>
                         </InputAdornment>
-                      )
+                      ),
                     }}
                     sx={{ gridColumn: "span 4" }}
                     {...(errors.password &&
                       touched.password && {
                         error: true,
-                        helperText: errors.password
+                        helperText: errors.password,
                       })}
                   />
                 </>
@@ -454,7 +454,7 @@ const RegisterPage = () => {
                     p: "1rem",
                     backgroundColor: palette.primary.main,
                     color: palette.background.alt,
-                    "&:hover": { color: palette.primary.main }
+                    "&:hover": { color: palette.primary.main },
                   }}
                 >
                   SIGN UP
@@ -467,7 +467,7 @@ const RegisterPage = () => {
                   sx={{
                     textDecoration: "underline",
                     color: palette.primary.main,
-                    "&:hover": { color: palette.primary.light }
+                    "&:hover": { color: palette.primary.light },
                   }}
                 >
                   Already have an account? Login Here.
