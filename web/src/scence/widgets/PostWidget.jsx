@@ -15,7 +15,8 @@ import {
 import FlexBetween from "components/FlexBetween";
 import Friend from "components/Friend";
 import WidgetWrapper from "components/widgetWrapper";
-import { useState } from "react";
+import { useState ,useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setPost } from "state";
 import axios from "axios";
@@ -43,7 +44,8 @@ const PostWidget = ({
   const loggedInUserId = useSelector((state) => state.user._id);
   const user = useSelector((state) => state.user);
   const isLiked = Boolean(likes?.[loggedInUserId.toString()] ?? false);
-  const likeCount = likes ? Object.keys(likes)?.length : 0;
+  const likeCount = likes ? Object.keys(likes).length : 0;
+  const navigate = useNavigate();
 
   const { palette } = useTheme();
   const main = palette.neutral.main;
@@ -72,11 +74,12 @@ const PostWidget = ({
           },
         })
       );
+      navigate(0)
     } catch (error) {
       console.error("Liking Failed:", error);
     }
   };
-
+  
   const addComment = async (comment) => {
     try {
       await axios.patch(
@@ -97,6 +100,7 @@ const PostWidget = ({
           },
         })
       );
+      navigate(0)
     } catch (error) {
       console.error("Commenting Failed:", error);
     }

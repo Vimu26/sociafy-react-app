@@ -22,7 +22,6 @@ const FriendListWidget = ({ userId }) => {
           },
         }
       );
-
       const data = response.data;
       dispatch(setFriends({ friends: data.data }));
     } catch (error) {
