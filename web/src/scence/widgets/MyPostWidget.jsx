@@ -18,6 +18,7 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import FlexBetween from "components/FlexBetween";
+import { useNavigate } from "react-router-dom";
 import Dropzone from "react-dropzone";
 import UserImage from "components/userImage";
 import WidgetWrapper from "components/widgetWrapper";
@@ -32,6 +33,7 @@ const MyPostWidget = () => {
   const [image, setImage] = useState(null);
   const [post, setPost] = useState("");
   const { palette } = useTheme();
+  const navigate = useNavigate();
   const user = useSelector((state) => state.user);
   const token = useSelector((state) => state.token);
   const posts = useSelector((state) => state.posts);
@@ -63,6 +65,7 @@ const MyPostWidget = () => {
       dispatch(setPosts({ posts: [newPost, ...posts] }));
       setImage(null);
       setPost("");
+      navigate(0)
     } catch (error) {
       console.error("Post Creation failed:", error);
     }

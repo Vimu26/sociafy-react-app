@@ -35,8 +35,9 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
           },
         }
       );
-      const updatedFriends = response.data.data.friends; // Assuming the response contains the updated list of friends
-      dispatch(setFriends({ friends: updatedFriends }));
+      const data = response.data;
+      dispatch(setFriends({ friends: data.data.friends }));
+      navigate(0)
     } catch (error) {
       console.error("Friend Add or Remove failed:", error);
     }
